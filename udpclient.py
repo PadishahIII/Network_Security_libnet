@@ -1,6 +1,6 @@
 from socket import *
 
-HOST = "172.20.115.179"
+HOST = "172.20.239.170"
 PORT = 9999
 BUFSIZ = 1024
 ADDR = (HOST, PORT)

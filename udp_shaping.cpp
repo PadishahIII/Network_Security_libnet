@@ -22,10 +22,12 @@ int main(int argc, char **argv)
     u_short src_port, dst_port;
     // u_char src_mac[6] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
     // u_char dst_mac[6] = {0x08, 0x00, 0x27, 0x33, 0x41, 0x8f};
-    // u_char src_mac[6] = {0x00, 0x15, 0x5d, 0x4b, 0x67, 0x2a};//wsl mac
+    // u_char src_mac[6] = {0x00, 0x15, 0x5d, 0x4b, 0x67, 0x2a}; // wsl mac
     // u_char dst_mac[6] = {0x00, 0x15, 0x5d, 0x4b, 0x67, 0x2a};
-    u_char src_mac[6] = {0x00, 0x15, 0x5d, 0x4b, 0x67, 0x2a};
-    u_char dst_mac[6] = {0x00, 0x15, 0x5d, 0x99, 0x99, 0xe9}; // windows mac
+    u_char src_mac[6] = {0x00, 0x15, 0x5d, 0x8a, 0x77, 0x7c}; // suc1
+    u_char dst_mac[6] = {0x00, 0x15, 0x5d, 0x58, 0x81, 0xfd}; // suc1
+    // u_char dst_mac[6] = {0x00, 0x15, 0x5d, 0x99, 0x99, 0xe9}; // windows mac
+
     char errbuf[LIBNET_ERRBUF_SIZE];
     src_ip = libnet_name2addr4(l, "192.168.232.111", LIBNET_DONT_RESOLVE);
     dst_ip = libnet_name2addr4(l, "192.168.232.222", LIBNET_DONT_RESOLVE);
@@ -126,8 +128,8 @@ int main(int argc, char **argv)
     cout << "send udp data" << endl;
     cout
         << "src:" << libnet_addr2name4(src_ip, LIBNET_DONT_RESOLVE) << ":" << src_port << endl
-        << "dst:" << libnet_addr2name4(dst_ip, LIBNET_DONT_RESOLVE) << ":" << dst_port << endl
-        << "AC 1E 81 2e:" << libnet_addr2name4((u_int32_t)0xac1e812e, LIBNET_DONT_RESOLVE) << endl;
+        << "dst:" << libnet_addr2name4(dst_ip, LIBNET_DONT_RESOLVE) << ":" << dst_port << endl;
+    //<< "AC 1E 81 2e:" << libnet_addr2name4((u_int32_t)0xac1e812e, LIBNET_DONT_RESOLVE) << endl;
     libnet_destroy(l);
     return 0;
 }

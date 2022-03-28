@@ -20,8 +20,10 @@ int main(int argc, char **argv)
     u_short payload_s;
     u_long src_ip, dst_ip;
     u_short src_port, dst_port;
-    u_char src_mac[6] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
-    u_char dst_mac[6] = {0x08, 0x00, 0x27, 0x33, 0x41, 0x8f};
+    // u_char src_mac[6] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
+    // u_char dst_mac[6] = {0x08, 0x00, 0x27, 0x33, 0x41, 0x8f};
+    u_char src_mac[6] = {0x00, 0x15, 0x5d, 0x8a, 0x77, 0x7c}; // suc1
+    u_char dst_mac[6] = {0x00, 0x15, 0x5d, 0x58, 0x81, 0xfd}; // suc1
     char errbuf[LIBNET_ERRBUF_SIZE];
     src_ip = libnet_name2addr4(l, "192.168.232.111", LIBNET_DONT_RESOLVE);
     dst_ip = libnet_name2addr4(l, "192.168.232.222", LIBNET_DONT_RESOLVE);
@@ -95,7 +97,7 @@ int main(int argc, char **argv)
         exit(-1);
     }
     tag = libnet_build_tcp(
-        src_port, dst_port, 0xbdea1122, 0x00000000, TH_SYN, 32767, 0, 0, LIBNET_TCP_H + payload_s, (uint8_t *)payload, payload_s, l, 0);
+        src_port, dst_port, 3, 4, TH_SYN, 32767, 0, 0, LIBNET_TCP_H + payload_s, (uint8_t *)payload, payload_s, l, 0);
     if (tag < 0)
     {
         cout << "libnet_build_tcp():" << libnet_geterror(l) << endl;
@@ -120,6 +122,9 @@ int main(int argc, char **argv)
         exit(-1);
     }
     cout << "send tcp data" << endl;
+    cout
+        << "src:" << libnet_addr2name4(src_ip, LIBNET_DONT_RESOLVE) << ":" << src_port << endl
+        << "dst:" << libnet_addr2name4(dst_ip, LIBNET_DONT_RESOLVE) << ":" << dst_port << endl;
     libnet_destroy(l);
     return 0;
 }
